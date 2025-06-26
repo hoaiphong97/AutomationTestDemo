@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Command to build your WPF application
-                bat 'msbuild /p:Configuration=Release WpfAppDemo.sln'
+                bat 'dotnet /p:Configuration=Release WpfAppDemo.sln'
             }
         }
         stage('Test') {
