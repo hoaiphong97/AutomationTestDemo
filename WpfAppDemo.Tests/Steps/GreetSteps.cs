@@ -3,6 +3,7 @@ using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Tools;
 using FlaUI.UIA3;
 using NUnit.Framework;
+using System.Diagnostics;
 using TechTalk.SpecFlow;
 
 namespace WpfAppDemo.Tests.Steps
@@ -13,6 +14,7 @@ namespace WpfAppDemo.Tests.Steps
         private Application _app;
         private AutomationBase _automation;
         private Window _mainWindow;
+        private static readonly ActivitySource ActivitySource = new("SpecFlowTest");
 
         [Given(@"the demo app is running")]
         public void GivenTheDemoAppIsRunning()
@@ -27,8 +29,9 @@ namespace WpfAppDemo.Tests.Steps
         [When(@"I enter ""(.*)"" in the input box")]
         public void WhenIEnterInTheInputBox(string name)
         {
+            using var activity = ActivitySource.StartActivity("WhenIEnterInTheInputBox");
             var inputBox = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("InputBox")).AsTextBox();
-            inputBox.Enter(name);
+            inputBox.Enter(name);            
         }
 
         [When(@"I click the hello button")]
