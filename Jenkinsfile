@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                bat 'dotnet version' 
+                bat 'dotnet --version' 
                 bat 'dotnet build --no-restore' 
             }
         }
