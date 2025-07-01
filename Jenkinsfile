@@ -9,13 +9,10 @@ pipeline {
             }
         }
 
-        stage('Run EXE') {
-            steps {
-                bat '''
-                echo Running MyApp.exe...
-                start "" "C:\\Path\\To\\YourApp\\MyApp.exe"
-                '''
-            }
+        stage('Open Notepad') {
+          steps {
+            bat 'start "" notepad.exe C:\temp\Demo.txt'
+          }
         }
     }
 }
