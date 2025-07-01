@@ -13,7 +13,7 @@ pipeline {
       steps {
         bat '''
           set JENKINS_NODE_COOKIE=dontKillMe
-          start "" notepad.exe C:\\temp\\Demo.txt
+          start "" C:\\temp\\Back.bat
         '''
       }
     }
