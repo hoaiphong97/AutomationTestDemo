@@ -11,12 +11,9 @@ pipeline {
       }
     }
 
-    stage('Open Notepad') {
+    stage('Run Batch File') {
       steps {
-        bat '''
-          set JENKINS_NODE_COOKIE=dontKillMe
-          start "" C:\\temp\\Back.bat
-        '''
+        bat 'call C:\\temp\\Back.bat'
       }
     }
   }
