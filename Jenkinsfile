@@ -1,5 +1,12 @@
 pipeline {
   agent any
+
+  environment {
+    ZIP_PATH = 'C:\\temp\\demo.zip'
+    EXTRACT_PATH = 'C:\\temp\\demo_extracted'
+    BAT_FILE = 'C:\\temp\\demo_extracted\\Back.bat'
+  }
+
   stages {
     stage('Build') {
       steps {
@@ -8,10 +15,31 @@ pipeline {
       }
     }
 
+    stage('Unzip Batch File') {
+      steps {
+        bat """
+        powershell -Command "if (Test-Path '${EXTRACT_PATH}') { Remove-Item -Recurse -Force '${EXTRACT_PATH}' }"
+        powershell -Command "Expand-Archive -Path '${ZIP_PATH}' -DestinationPath '${EXTRACT_PATH}' -Force"
+        """
+      }
+    }
+
     stage('Run Batch File') {
       steps {
-        bat 'call C:\\temp\\Back.bat'
+        bat """
+        cd ${EXTRACT_PATH}
+        call Back.bat
+        """
       }
+    }
+  }
+
+  post {
+    success {
+      echo '✅ Pipeline completed successfully.'
+    }
+    failure {
+      echo '❌ Something went wrong. Please check the logs.'
     }
   }
 }
