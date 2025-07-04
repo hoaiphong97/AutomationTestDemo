@@ -32,6 +32,12 @@ pipeline {
         """
       }
     }
+    stage('Publish Test Results') {
+        steps {
+            // Publish .trx as test result
+            mstest testResultsFile: 'C:\\temp\\*.trx'
+        }
+    }
   }
 
   post {
