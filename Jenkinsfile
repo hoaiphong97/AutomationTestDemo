@@ -33,12 +33,12 @@ pipeline {
       }
     }
     stage('Publish Test Results') {
-        steps {
           xunit thresholds: [
-            failed(0), skipped(0)
+            failed(0),
+            skipped(0)
           ],
           tools: [
-            mstest(testResultsPattern: '**/*.trx')
+            mstest(pattern: '**/*.trx')
           ]
         }
       }
