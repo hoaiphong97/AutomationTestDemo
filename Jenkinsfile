@@ -34,11 +34,15 @@ pipeline {
     }
     stage('Publish Test Results') {
         steps {
-            // Publish .trx as test result
-            mstest testResultsFile: 'C:\\temp\\TestResults.trx'
+          xunit thresholds: [
+            failed(0), skipped(0)
+          ],
+          tools: [
+            mstest(testResultsPattern: '**/*.trx')
+          ]
         }
+      }
     }
-  }
 
   post {
     success {
