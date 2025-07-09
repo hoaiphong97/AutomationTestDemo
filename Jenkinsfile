@@ -34,7 +34,7 @@ pipeline {
     }
     stage('Publish MSTest Results') {
       steps {
-        mstest testResultsFile: '**/*.trx'
+        mstest testResultsFile: '"C:\temp\*.trx"'
       }
     }
   }
