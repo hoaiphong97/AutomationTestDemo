@@ -32,15 +32,9 @@ pipeline {
         """
       }
     }
-    stage('Publish Test Results') {
+    stage('Publish MSTest Results') {
       steps {
-        xunit thresholds: [
-          failed(0),
-          skipped(0)
-        ],
-        tools: [
-          mstest(pattern: '**/*.trx')
-        ]
+        mstest testResultsFile: '**/*.trx'
       }
     }
   }
