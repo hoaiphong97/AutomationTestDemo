@@ -33,6 +33,7 @@ pipeline {
       }
     }
     stage('Publish Test Results') {
+      steps {
         xunit thresholds: [
           failed(0),
           skipped(0)
@@ -42,7 +43,7 @@ pipeline {
         ]
       }
     }
-    
+  }
 
   post {
     success {
